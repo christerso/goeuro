@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Example: RUN="java -jar $DIR/target/magic.jar"
 
 # Of-course I could also install it but this works also
-RUN="~/goeuro/build/src/goeuro"
+RUN="/data/test/goeuro/build/src/goeuro"
 NAME="goeuro"
 
 DATA_FILE=$2
