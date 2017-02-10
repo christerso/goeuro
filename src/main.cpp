@@ -5,17 +5,16 @@
 
 int main(int argc, char** argv)
 {
-    std::string bus_route_file("resources/bus-routes.txt");
-
-    if (argc < 2)
+	std::string bus_route_file;
+    if (argc >= 2)
     {
-        std::cout << "Using default route file: resources/bus_routes.txt" << std::endl;
-    }
-    else
-    {
-        std::cout << "Loading routes from : " << argv[1] << std::endl;
         bus_route_file = argv[1];
     }
+	else
+	{
+		std::cout << "Need a bus route file as argument" << std::endl;
+		exit(1);
+	}
 
     Net::Port port(8088);
     unsigned int threads = std::thread::hardware_concurrency();

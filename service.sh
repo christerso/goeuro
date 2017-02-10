@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Example: RUN="java -jar $DIR/target/magic.jar"
 
 # Of-course I could also install it but this works also
-RUN="/data/test/goeuro/build/src/goeuro"
+RUN="$DIR/build/src/goeuro"
 NAME="goeuro"
 
 DATA_FILE=$2
@@ -15,9 +15,9 @@ LOGFILE=/tmp/$NAME.log
 
 start() {
     if [ -f $PIDFILE ]; then
-        if kill -0 $(cat $PIDFILE); then
-            echo 'Service already running' >&2
-            return 1
+		if `pidof $NAME`; then
+           echo 'Service already running' >&2
+           return 1
         else
             rm -f $PIDFILE
         fi
@@ -27,11 +27,15 @@ start() {
 }
 
 stop() {
-    if [ ! -f $PIDFILE ] || ! kill -0 $(cat $PIDFILE); then
-        echo 'Service not running' >&2
+	if pidof $NAME; then
+    	kill -15 `pidof $NAME`
+		rm -f $PIDFILE
+        echo 'Service Stopped' >&2
         return 1
-    fi
-    kill -15 $(cat $PIDFILE) && rm -f $PIDFILE
+	else
+		echo 'Service not running' >&2
+		rm -f $PIDFILE
+	fi
 }
 
 

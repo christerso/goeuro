@@ -18,7 +18,6 @@ void BusRoute::load_routes(std::string filename)
         int number_of_routes;
         std::stringstream buffer(route);
         buffer >> number_of_routes;
-        std::cout << "Loading " << number_of_routes << " routes" << std::endl;
         int count;
         for (count = 0; count < number_of_routes; ++count)
         {
